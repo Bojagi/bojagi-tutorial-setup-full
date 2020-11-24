@@ -9,7 +9,6 @@ export const Button = ({variant, children}) => {
     classes.push('outlined');
     classes.push('dotted');
   }
-  console.log('classes', classes);
   return (
     <button className={classes.join(' ')}>{children}</button>
   );

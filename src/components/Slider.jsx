@@ -13,7 +13,6 @@ export const Slider = () => {
 
   React.useEffect(() => {
     const handleMouseMove = (e) => {
-      console.log('dragg', dragged);
       if (dragged) {
         const barRect = barRef.current.getBoundingClientRect();
         
@@ -35,8 +34,6 @@ export const Slider = () => {
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [dragged, barRef]);
-
-  console.log('position', position)
 
   return <div className="slider" ref={barRef}>
     <div 
