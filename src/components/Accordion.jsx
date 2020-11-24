@@ -1,28 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-
-const AccordionItemWrapper = styled.div`
-  overflow: hidden;
-  transition: height 0.1s linear;
-  height: ${props => props.open ? props.fullHeight : 0}px;
-  line-height: 1.3em;
-`;
-
-const AccordionItemInnerWrapper = styled.div`
-  border: 1px solid #aaa;
-  border-top: 0;
-  padding: 8px;
-  font-family: sans-serif;
-`;
-
-const AccordionItemTitle = styled.h3`
-  cursor: pointer;
-  background-color: #ccc;
-  border: 1px solid #aaa;
-  padding: 8px;
-  margin: -1px 0 0;
-  font-family: sans-serif;
-`;
+require('./Accordion.css');
 
 export function Accordion({children}) {
   const [indexOpen, setIndexOpen] = React.useState(null);
@@ -30,7 +7,7 @@ export function Accordion({children}) {
   return <>
     {children.map((child, i) => (
       <>
-        <AccordionItemTitle onClick={() => setIndexOpen(i)}>{child.props.title}</AccordionItemTitle>
+        <h3 className="accordion__item__title" onClick={() => setIndexOpen(i)}>{child.props.title}</h3>
         {React.cloneElement(child, { open: indexOpen === i })}
       </>
     ))}
@@ -48,14 +25,13 @@ export function AccordionItem({title, open, children}) {
   }, [wrapperRef.current]);
   
   return (
-    <AccordionItemWrapper
-      open={fullHeight === null || open}
-      fullHeight={fullHeight}
+    <div className="accordion__item"
+      style={{height: open ? fullHeight : undefined}}
       ref={wrapperRef}
     >
-      <AccordionItemInnerWrapper>
+      <div className="accordion__item__inner">
         {children}
-      </AccordionItemInnerWrapper>
-    </AccordionItemWrapper>
+      </div>
+    </div>
   )
 }
